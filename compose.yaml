@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: mysql
+    container_name: mysql-container
+    restart: always
+    ports:
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - /var/lib/docker/volumes/mysql-db/_data:/var/lib/mysql
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    container_name: cardapio-api
+    ports:
+      - "8080:8080"
+    restart: always
+
+    
