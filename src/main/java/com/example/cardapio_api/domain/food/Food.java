@@ -26,6 +26,8 @@ public class Food {
     private Long id;
     private String title;
     private String image;
+    private String description;
+    private String ingredients;
     private double price;
 
     public Food(CreateFoodDTO dto) {

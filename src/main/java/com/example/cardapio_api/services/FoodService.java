@@ -33,6 +33,8 @@ public class FoodService {
         Food food = repository.findById(id).orElseThrow(() -> new FoodNotFoundException());
         food.setTitle(data.title());
         food.setImage(data.image());
+        food.setDescription(data.description());
+        food.setIngredients(data.ingredients());
         food.setPrice(data.price());
         repository.save(food);
         return food;
