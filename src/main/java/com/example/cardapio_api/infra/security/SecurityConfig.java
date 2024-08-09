@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/hello/world").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/food").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/food/types").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/recover").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 

@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.cardapio_api.domain.food.Food;
 import com.example.cardapio_api.dtos.food.CreateFoodDTO;
-import com.example.cardapio_api.dtos.food.FindFoodDTO;
 import com.example.cardapio_api.dtos.food.UpdateFoodDTO;
 import com.example.cardapio_api.dtos.food.UpdateFoodResponseDTO;
 import com.example.cardapio_api.services.FoodService;
 import java.util.List;
+import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,5 +54,10 @@ public class FoodController {
     @GetMapping
     public List<Food> findAll() {
         return service.findAll();
+    }
+
+    @GetMapping("types")
+    public Map<String,List<Food>> findAllGrouped() {
+        return service.findAllGrouped();
     }
 }
