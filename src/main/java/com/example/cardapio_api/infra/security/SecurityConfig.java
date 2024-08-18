@@ -28,12 +28,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/hello/world").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/food").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/food/types").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/recover").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login","/auth/recover","/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/food/**", "/food", "/food/types", "/types").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/food", "/types").hasAnyRole("ADMIN","MASTER")
+                        .requestMatchers(HttpMethod.PUT, "/food", "/types").hasAnyRole("ADMIN","MASTER")
+                        .requestMatchers(HttpMethod.DELETE, "/food", "/types").hasAnyRole("ADMIN","MASTER")
+
 
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

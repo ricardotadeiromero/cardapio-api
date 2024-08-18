@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,8 @@ public class User implements UserDetails {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role")
     private Role role;
+    @Lob
+    private byte[] image;
 
     public User(RegisterRequestDTO user) {
         this.email = user.email();
@@ -48,9 +51,10 @@ public class User implements UserDetails {
         this.role = user.role();
     }
 
-    public User(String id, String email, String username, Role role) {
+    public User(String id, String email, String username, Role role, byte[] image) {
         this.id = id;
         this.email = email;
+        this.image = image;
         this.username = username;
         this.role = role;
     }
