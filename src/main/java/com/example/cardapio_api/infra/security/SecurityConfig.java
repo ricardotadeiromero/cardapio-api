@@ -28,12 +28,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/auth/login","/auth/recover","/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/recover", "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/food/**", "/food", "/food/types", "/types").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/food", "/types").hasAnyRole("ADMIN","MASTER")
-                        .requestMatchers(HttpMethod.PUT, "/food", "/types").hasAnyRole("ADMIN","MASTER")
-                        .requestMatchers(HttpMethod.DELETE, "/food", "/types").hasAnyRole("ADMIN","MASTER")
-
+                        .requestMatchers(HttpMethod.POST, "/food", "/types").hasAnyAuthority("ADMIN", "MASTER")
+                        .requestMatchers(HttpMethod.POST, "/order").hasAnyAuthority("COMMON")
+                        .requestMatchers(HttpMethod.GET, "/order/active").hasAnyAuthority("ADMIN", "MASTER")
+                        .requestMatchers(HttpMethod.PUT, "/food", "/types").hasAnyAuthority("ADMIN", "MASTER")
+                        .requestMatchers(HttpMethod.DELETE, "/food", "/types").hasAnyAuthority("ADMIN", "MASTER")
 
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

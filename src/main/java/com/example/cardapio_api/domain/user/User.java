@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.cardapio_api.domain.role.Role;
 import com.example.cardapio_api.dtos.RegisterRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,6 +43,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "role")
     private Role role;
     @Lob
+    @JsonIgnore
     private byte[] image;
 
     public User(RegisterRequestDTO user) {

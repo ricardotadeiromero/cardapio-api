@@ -2,6 +2,7 @@ package com.example.cardapio_api.domain.food;
 
 import com.example.cardapio_api.dtos.food.CreateFoodDTO;
 import com.example.cardapio_api.dtos.food.UpdateFoodDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

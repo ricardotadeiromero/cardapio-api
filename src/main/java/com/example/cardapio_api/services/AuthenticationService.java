@@ -43,6 +43,11 @@ public class AuthenticationService {
         return user;
     }
 
+    public User findById(String id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
+        return user;
+    }
+
     public User update(UpdateUserDTO dto) {
         User user = userRepository.findById(dto.id()).orElseThrow(() -> new UserNotFoundException());
         

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.example.cardapio_api.infra.exceptions.food.FoodNotFoundException;
+import com.example.cardapio_api.infra.exceptions.order.OrderNotFoundException;
 import com.example.cardapio_api.infra.exceptions.type.TypeNotFoundException;
 import com.example.cardapio_api.infra.exceptions.user.UnauthorizedException;
 import com.example.cardapio_api.infra.exceptions.user.UserNotFoundException;
@@ -28,8 +29,13 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(UserNotFoundException.class) 
+    @ExceptionHandler(UserNotFoundException.class)
     private ResponseEntity<String> userNotFoundException(UserNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    private ResponseEntity<String> orderNotFoundException(OrderNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }
